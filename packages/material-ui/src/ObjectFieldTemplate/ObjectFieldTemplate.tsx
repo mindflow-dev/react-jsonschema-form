@@ -33,6 +33,9 @@ const ObjectFieldTemplate = ({
 }: ObjectFieldTemplateProps) => {
   const classes = useStyles();
 
+  const filterHidden = (element: any) =>
+  element.content.props.uiSchema["ui:widget"] !== "hidden";
+
   return (
     <>
       {(uiSchema['ui:title'] || title) && (
@@ -49,7 +52,7 @@ const ObjectFieldTemplate = ({
         />
       )}
       <Grid container={true} spacing={2} className={classes.root}>
-        {properties.map((element: any, index: number) => (
+        {properties.filter(filterHidden).map((element: any, index: number) => (
           <Grid
             item={true}
             xs={12}
